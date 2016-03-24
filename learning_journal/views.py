@@ -35,7 +35,7 @@ def detail_view(request):
     text = md.convert(article.text)
     return {'article': article, 'text': text}
 
-
+@view_config(route_name='add_entry', renderer='templates/add_entry.jinja2', permission='edit', request_method="POST", check_csrf=True)
 @view_config(route_name='add_entry', renderer='templates/add_entry.jinja2', permission='edit')
 def add_entry_view(request):
     """Add entry view."""

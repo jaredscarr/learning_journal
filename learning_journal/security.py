@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import os
 from pyramid.security import (
     Allow,
@@ -9,13 +8,13 @@ from pyramid.security import (
     )
 
 from passlib.apps import custom_app_context as pl
+from wtforms.ext.csrf.form import SecureForm
 
 
 class DefaultRoot(object):
     """I Hope this is the right place for an acl."""
     __acl__ = [(Allow, Everyone, 'view'),
                (Allow, Authenticated, 'edit')]
-    # __acl__ = [(Allow, 'jared', 'chicken')]
 
     def __init__(self, request):
         """Init."""

@@ -15,6 +15,7 @@
 {% block body %}
  <section>
         <form action="" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
             <div class="row">
                 <div class="one column"></div>
                 <div class="five columns">

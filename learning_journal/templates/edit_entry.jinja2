@@ -14,6 +14,7 @@
 {% endblock %}
 {% block body %}
     <form action="" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
         <h4>Title</h4>
         <input name="title" value="{{ article.title }}" required></input>
         <textarea name="text" required>{{ article.text }}</textarea>
