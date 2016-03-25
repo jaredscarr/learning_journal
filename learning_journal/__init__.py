@@ -27,8 +27,6 @@ def main(global_config, **settings):
         'sosecret', hashalg='sha512')
     authz_policy = ACLAuthorizationPolicy()
     config = Configurator(settings=settings,
-                          # authentication_policy=authn_policy,
-                          # authorization_policy=authz_policy,
                           root_factory=DefaultRoot,)
     config.set_authentication_policy(authn_policy)
     config.set_authorization_policy(authz_policy)
