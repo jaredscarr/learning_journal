@@ -4,7 +4,6 @@
         <ul>
             {% if request.has_permission('edit') %}
                 <li><a class="button" href="/">Home</a></li>
-                <li><a class="button" href="/add_entry">Add</a></li>
                 <li><a class="button" href="/logout">Logout</a></li>
             {% else %}
                 <li><a class="button" href="/">Home</a></li>
@@ -14,8 +13,11 @@
     </nav>
 {% endblock %}
 {% block body %}
-    {% for article in articles[::-1] %}
-        <h4><a href="/article/{{ article.id }}">{{ article.title }}</a></h4>
-        <p>{{ article.created }}</p>
-    {% endfor %}
+    <form action="" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ request.session.get_csrf_token() }}">
+        <h4>Title</h4>
+        <input name="title" value="{{ article.title }}" required></input>
+        <textarea name="text" required>{{ article.text }}</textarea>
+        <button type="submit">Submit</button>
+    </form>
 {% endblock %}
