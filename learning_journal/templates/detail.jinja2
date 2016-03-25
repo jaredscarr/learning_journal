@@ -17,5 +17,7 @@
     <h4>{{ article.title }}</h4>
     {{ text|safe }}
     <p>{{ article.created }}</p>
-    <a class="button" href="/edit_entry/{{ article.id }}">Edit</a>
+    {% if request.has_permission('edit') %}
+        <a class="button" href="/edit_entry/{{ article.id }}">Edit</a>
+    {% endif %}
 {% endblock %}
