@@ -63,3 +63,4 @@ target/
 
 #local files
 .DS_Store
+tests/
