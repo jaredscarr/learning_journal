@@ -27,10 +27,10 @@ def test_detail_view_functional_0(loaded_db_item, app):
     assert loaded_db_item.title in response
 
 
-def test_edit_entry_view_functional(loaded_db_item, app):
+def test_edit_entry_view_functional(loaded_db_item, authenticated_app):
     """Test if the db updates upon request."""
     from learning_journal.models import Entry, DBSession
-    app.post('/edit_entry/{}'.format(loaded_db_item.id),
+    authenticated_app.post('/edit_entry/{}'.format(loaded_db_item.id),
              {'title': 'new title', 'text': 'new text'})
     new = DBSession.query(Entry).filter(Entry.id == loaded_db_item.id).first()
     assert new.title == 'new title'
