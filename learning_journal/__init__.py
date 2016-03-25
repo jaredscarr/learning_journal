@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
 from pyramid.authentication import AuthTktAuthenticationPolicy
@@ -16,6 +17,9 @@ from .security import DefaultRoot
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application."""
     session = SignedCookieSessionFactory('VALIDATE', hashalg='sha512')
+    database_url = os.environ.get('DATABASE_URL', None)
+    if database_url is not None:
+        settings['sqlalchemy.url'] = database_url
     engine = engine_from_config(settings, 'sqlalchemy.')
     DBSession.configure(bind=engine)
     Base.metadata.bind = engine

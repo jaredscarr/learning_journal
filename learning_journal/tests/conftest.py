@@ -11,7 +11,7 @@ from learning_journal import main
 
 
 TEST_DATABASE_URL = 'postgres://jrockscarr:password@localhost:5432/lj_test'
-DATA_SUCCESS = {'username': 'jaredscarr', 'password': 'pirateninja'}
+DATA_SUCCESS = {'username': 'admin', 'password': 'secret'}
 
 
 @pytest.fixture(scope='session')
@@ -76,7 +76,7 @@ def dummy_post(dbtransaction):
 
 
 @pytest.fixture()
-def app():
+def app(dbtransaction):
     settings = {'sqlalchemy.url': 'postgres://jrockscarr:password@localhost:5432/lj_test'}
     app = main({}, **settings)
     return webtest.TestApp(app)
@@ -90,5 +90,9 @@ def auth_env():
 
 @pytest.fixture()
 def authenticated_app(app, auth_env):
-    app.post('/login', DATA_SUCCESS)
+    result = app.post('/login', DATA_SUCCESS)
     return app
+
+# @pytest.fixture()
+# def validated(app, auth_env):
+#     app.post('')

@@ -46,10 +46,10 @@ def test_edit_entry_view_unit(loaded_db_item, dummy_post):
     assert response.status_code == 302
 
 
-def test_add_entry_view_functional(app):
+def test_add_entry_view_functional(authenticated_app):
     """Test if the db updates upon request."""
     from learning_journal.models import Entry, DBSession
-    app.post('/add_entry', {'title': 'fancy title', 'text': 'new text'})
+    authenticated_app.post('/add_entry', {'title': 'fancy title', 'text': 'new text'})
     new_entry = DBSession.query(Entry).filter(
                 Entry.title == 'fancy title').first()
     assert new_entry.id
