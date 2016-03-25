@@ -41,6 +41,7 @@ virtualenv==15.0.1
 waitress==0.8.10
 watchdog==0.8.3
 WebOb==1.6.0
+WebTest==2.0.20
 WTForms==2.1
 zope.deprecation==4.1.2
 zope.interface==4.1.3
